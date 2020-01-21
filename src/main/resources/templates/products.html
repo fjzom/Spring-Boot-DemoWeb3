@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<table class="table table-striped">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Price</th>
+					<th scope="col">Offer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product : ${products}">
+					<td scope="col" th:text="${product.name}"> </td>
+					<td scope="col" th:text="${product.price}"> </td>
+					<td scope="col" th:text="${product.offerType}"> </td>					
+					<td>
+						<a  th:href="@{'/editproduct/{productId}'(productId=${product.productId})}"   class="btn btn-primary">edit</a>
+					</td> 			
+					<td>
+						<a  th:href="@{'/deleteproduct/{productId}'(productId=${product.productId})}"   class="btn btn-danger">delete</a>
+					</td> 
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

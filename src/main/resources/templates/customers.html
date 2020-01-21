@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<table class="table table-striped">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">View</th> 
+					<th scope="col">Name</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customers}">
+					<td scope="col" ><a th:href="@{'/view/{customerId}'(customerId=${customer.customerId})}">view</a></td>
+					<td scope="col" th:text="${customer.name}"></td> 				
+					<td>
+						<a  th:href="@{'/editcustomer/{customerId}'(customerId=${customer.customerId})}"   class="btn btn-primary">edit</a>
+					</td> 			
+					<td>
+						<a  th:href="@{'/deletecustomer/{customerId}'(customerId=${customer.customerId})}"   class="btn btn-danger">delete</a>
+					</td> 
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
