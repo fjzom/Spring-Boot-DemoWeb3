@@ -46,7 +46,8 @@ src/main/java
 		#Photo#
 			#photoId#
 			#title#
-			#image#
+			#image#~@JsonInclude() @Transient~
+			~createAt @Column @Temporal @DateTmeFormat @PrePersist~
 		~Bill.java @Entity @Table~
 			~billId @Id @GeneratedValue~
 			~description~
@@ -125,7 +126,7 @@ spring.main.allow-bean-definition-overriding=true
 spring.servlet.multipart.max-file-size=256MB
 spring.servlet.multipart.max-request-size=256MB
 spring.servlet.multipart.enabled=true
-	
+
 
 ##Extra##
 Basic->offers->delete/form->view/layoutsS-> foto
@@ -150,4 +151,20 @@ Solution: eliminate .m2 folder
 Spring Security
 heroku
 
+# JPA #
+OneToOne: 
+Approch1: Undirectional: you can insert in Table 2 no metter if there is not Table 1 PK created first
+		-Add in  Entity 1 an object type Entity 2 
+		-Add in  Entity 2 an object type Entity 1 
+		-In Entity 1 add @OneToOne MappedBy and refer object created in Entiy 2
+		-In Entity 2 add @JoinColumn and set FK name or refer PK Entity 2 name in order to avoid create new fk(mirroring)
+Approach: Bidireccional: you cannot insert in Table 2 if there is not Table 1 PK created first
+		-Add in  Entity 1 an object type Entity 2 
+		-Add in  Entity 2 an object type Entity 1 
+		-In Entity 1 add @OneToOne MappedBy and refer object created in Entiy 2
+		-In Enity 2 add @OneToOne @MapsId 
+		
+
+@JoinColumn could be used in both sides but is rare in OneToMany side, indicates that this entity is the owner
+mappedBy  OneToMany 
  
