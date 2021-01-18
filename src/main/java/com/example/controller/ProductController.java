@@ -21,7 +21,7 @@ public class ProductController {
 	@Autowired
 	private IProductRepo productRepo;
 
-	@RequestMapping(name = "addproduct", method = RequestMethod.POST)
+	@RequestMapping(value = "addproduct", method = RequestMethod.POST)
 	@ResponseBody
 	public void addProduct(@RequestParam(defaultValue = "NEW", required = false, name = "name") String name,
 			@RequestParam(name = "price") Double price,
